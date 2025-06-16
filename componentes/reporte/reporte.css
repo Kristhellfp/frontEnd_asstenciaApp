@@ -1,0 +1,71 @@
+.reporte-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reporte-container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.form-reporte {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-reporte label {
+  font-weight: bold;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.form-reporte input[type="text"],
+.form-reporte input[type="email"],
+.form-reporte textarea {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.form-reporte textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px 0;
+}
+
+.form-reporte button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.form-reporte button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.form-reporte button[type="button"] {
+  background-color: transparent;
+  color: #007bff;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  margin-top: -8px;
+  font-size: 0.9rem;
+}

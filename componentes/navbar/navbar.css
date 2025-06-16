@@ -1,0 +1,40 @@
+.navbar {
+  background: linear-gradient(90deg, #004b7c, #0074b7);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.navbar .nav-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+#cerrarSesion {
+  background: linear-gradient(135deg, #ff5e5e, #e74c3c);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#cerrarSesion:hover {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+  transform: scale(1.05);
+}

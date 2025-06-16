@@ -1,0 +1,36 @@
+.alumno-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px 0;
+  transition: background-color 0.3s ease;
+}
+
+.alumno-box.presente {
+  background-color: #d4edda; /* verde claro */
+}
+
+.alumno-box.ausente {
+  background-color: #f8d7da; /* rojo claro */
+}
+
+.alumno-box.tarde {
+  background-color: #fff3cd; /* amarillo claro */
+}
+
+.alumno-box.falta-uniforme {
+  border-color: #e07b7b;
+  box-shadow: 0 0 10px #e07b7b;
+}
+
+.acciones-asistencia button {
+  margin-right: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+button {
+  margin-top: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}

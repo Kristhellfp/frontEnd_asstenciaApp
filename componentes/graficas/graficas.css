@@ -1,0 +1,49 @@
+.graficas-container {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.graficas-container h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #2f3542;
+}
+
+.grafica-wrapper {
+  overflow-x: auto;
+  padding: 30px;
+  background-color: #f5f6fa;
+  border-radius: 8px;
+  border: 1px solid #dcdde1;
+  margin-bottom: 40px;
+}
+
+.graficas-container canvas {
+  min-width: 1000px;
+  height: 420px;
+  display: block;
+  margin: 0 auto;
+}
+
+.boton-volver {
+  padding: 12px 28px;
+  font-size: 1rem;
+  background-color: #0063cc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.boton-volver:hover {
+  background-color: #004fa2;
+  transform: translateY(-2px);
+}

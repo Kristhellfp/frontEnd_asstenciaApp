@@ -1,0 +1,214 @@
+.uniforme-container {
+  max-width: 500px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.uniforme-container h2 {
+  background: linear-gradient(135deg, #0055a4, #003366);
+  color: white;
+  padding: 1.8rem;
+  border-radius: 10px;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: inset 0 -5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.uniforme-container h3 {
+  background-color: #eef1f6;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+.uniforme-lista {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.fila-prenda {
+  background-color: #fdfdfd;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease-in-out;
+}
+
+.fila-prenda:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.fila-prenda img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.botones-revision {
+  display: flex;
+  gap: 15px;
+}
+
+.boton-verde, .boton-rojo {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.boton-verde {
+  background: linear-gradient(135deg, #28a745, #1c7c32);
+}
+
+.boton-rojo {
+  background: linear-gradient(135deg, #dc3545, #a62d2d);
+}
+
+.boton-verde:hover, .boton-rojo:hover {
+  transform: scale(1.15);
+}
+
+.boton-inicio {
+  display: block;
+  margin: 2rem auto 0;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #0073e6, #005bb5);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.boton-inicio:hover {
+  background: linear-gradient(135deg, #005bb5, #004080);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.fila-prenda {
+  border: 2px solid transparent;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.fila-prenda.cumple {
+  border-color: #28a745;
+  background-color: #eafaf1;
+}
+
+.fila-prenda.no-cumple {
+  border-color: #dc3545;
+  background-color: #fdecec;
+}
+
+.botones-revision button {
+  font-size: 1.2rem;
+  margin: 0 6px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  transition: transform 0.2s ease;
+}
+
+.botones-revision button:hover {
+  transform: scale(1.2);
+}
+
+.boton-volver {
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #2980b9;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.boton-volver:hover {
+  background-color: #1c6692;
+}
+
+/* Contenedor general de detalles */
+.detalle-uniforme {
+  background: #f9fafb;           /* Fondo muy claro */
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 400px;
+  margin: 20px auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Cada ítem detalle */
+.detalle-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e1e4e8;
+}
+
+/* Último ítem sin borde */
+.detalle-item:last-child {
+  border-bottom: none;
+}
+
+/* Etiqueta del campo */
+.detalle-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 1rem;
+}
+
+/* Valor o estado */
+.detalle-valor {
+  font-weight: 500;
+  color: #555;
+  font-size: 0.95rem;
+  background-color: #e7f3ff;
+  padding: 5px 12px;
+  border-radius: 20px;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Valor positivo */
+.detalle-valor.correcto {
+  background-color: #d1f2d8;  /* verde suave */
+  color: #2f7a32;
+}
+
+/* Valor negativo */
+.detalle-valor.falta {
+  background-color: #f8d7da;  /* rojo suave */
+  color: #842029;
+}
+
+/* Opcional: Hover en los ítems para dar feedback */
+.detalle-item:hover {
+  background-color: #f1f5f9;
+  cursor: default;
+}

@@ -1,0 +1,48 @@
+.recuperar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f0f0f0;
+}
+
+.formulario {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 300px;
+}
+
+.formulario input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.6rem 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.formulario button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.link {
+  color: #007bff;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.mensaje-estado {
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
