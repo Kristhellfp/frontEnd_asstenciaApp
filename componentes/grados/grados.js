@@ -24,6 +24,15 @@ export function crearGrados(navegarA) {
     grados.push(`Grado ${i}`);
   }
 
+  // Configuración de horario
+  const horarioAsistencia = { inicio: '07:00', fin: '08:00' };
+
+  function validarHorario() {
+    const ahora = new Date();
+    const horaActual = ahora.toTimeString().slice(0,5); // "HH:MM"
+    return (horaActual >= horarioAsistencia.inicio && horaActual <= horarioAsistencia.fin);
+  }
+
   function renderGrados() {
     lista.innerHTML = '';
     grados.forEach((grado, index) => {
@@ -40,9 +49,13 @@ export function crearGrados(navegarA) {
       btn.textContent = grado;
       btn.style.flexGrow = '1';
       btn.addEventListener('click', () => {
-        const vistaListado = mostrarListado(grado, navegarA);
-        vistaListado.dataset.view = 'listado';
-        navegarA(vistaListado);
+        if (validarHorario()) {
+          const vistaListado = mostrarListado(grado, navegarA);
+          vistaListado.dataset.view = 'listado';
+          navegarA(vistaListado);
+        } else {
+          alert(`No se puede tomar asistencia fuera del horario permitido.\nHorario: ${horarioAsistencia.inicio} - ${horarioAsistencia.fin}`);
+        }
       });
 
       const btnEliminar = document.createElement('button');
@@ -68,14 +81,18 @@ export function crearGrados(navegarA) {
   }
 
   renderGrados();
-
   contenedor.appendChild(lista);
 
   const acciones = document.createElement('div');
   acciones.classList.add('acciones');
 
-  const btnEnviar = document.createElement('button');
-  btnEnviar.textContent = 'Enviar';
+  // Cambiar texto de botón "Enviar" a "Guardar asistencia de todos los grados"
+  const btnGuardar = document.createElement('button');
+  btnGuardar.textContent = 'Guardar asistencia de todos los grados';
+  // Aquí puedes agregar el evento para guardar si tienes esa lógica
+  btnGuardar.addEventListener('click', () => {
+    alert('Funcionalidad para guardar asistencia aún no implementada.');
+  });
 
   const btnVer = document.createElement('button');
   btnVer.textContent = 'Ver gráficas';
@@ -91,7 +108,7 @@ export function crearGrados(navegarA) {
     navegarA(vistaProfesores);
   });
 
-  acciones.append(btnEnviar, btnVer, btnProfesores);
+  acciones.append(btnGuardar, btnVer, btnProfesores);
   contenedor.appendChild(acciones);
 
   return contenedor;
@@ -218,6 +235,27 @@ function mostrarListado(grado, navegarA) {
       listaAlumnos.appendChild(tarjeta);
     });
   }
+
+  // Botón para marcar toda la lista como presente
+  const btnMarcarTodoPresente = document.createElement('button');
+  btnMarcarTodoPresente.textContent = 'Marcar todo como presente';
+  btnMarcarTodoPresente.style.marginBottom = '15px';
+  btnMarcarTodoPresente.style.padding = '8px 12px';
+  btnMarcarTodoPresente.style.borderRadius = '6px';
+  btnMarcarTodoPresente.style.border = 'none';
+  btnMarcarTodoPresente.style.backgroundColor = 'green';
+  btnMarcarTodoPresente.style.color = 'white';
+  btnMarcarTodoPresente.style.cursor = 'pointer';
+
+  btnMarcarTodoPresente.addEventListener('click', () => {
+    alumnos.forEach(alumno => {
+      alumno.asistencia = 'presente';
+      alumno.justificado = false;
+    });
+    renderAlumnos();
+  });
+
+  contenedor.appendChild(btnMarcarTodoPresente);
 
   renderAlumnos();
   contenedor.appendChild(listaAlumnos);

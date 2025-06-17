@@ -8,62 +8,49 @@ export function crearRegistro(navegarA) {
   formulario.classList.add('formulario');
 
   const titulo = document.createElement('h2');
-  titulo.textContent = 'Crear cuenta';
+  titulo.textContent = 'Crear Cuenta Nueva';
 
   const inputUsuario = document.createElement('input');
   inputUsuario.type = 'text';
-  inputUsuario.placeholder = 'Nombre de usuario';
-
-  const inputCorreo = document.createElement('input');
-  inputCorreo.type = 'email';
-  inputCorreo.placeholder = 'Correo electrónico';
+  inputUsuario.placeholder = 'Nuevo Usuario';
 
   const inputContrasena = document.createElement('input');
   inputContrasena.type = 'password';
-  inputContrasena.placeholder = 'Contraseña';
+  inputContrasena.placeholder = 'Nueva Contraseña';
 
-  const btnCrear = document.createElement('button');
-  btnCrear.textContent = 'Crear cuenta';
+  const btnRegistrar = document.createElement('button');
+  btnRegistrar.textContent = 'Registrar';
+
+  const mensaje = document.createElement('p');
+  mensaje.classList.add('mensaje');
+
+  btnRegistrar.addEventListener('click', () => {
+    const usuario = inputUsuario.value.trim();
+    const contrasena = inputContrasena.value.trim();
+
+    if (!usuario || !contrasena) {
+      mensaje.textContent = 'Usuario o contraseña vacíos';
+      mensaje.style.color = 'red';
+      return;
+    }
+
+    mensaje.textContent = 'Usuario registrado con éxito';
+    mensaje.style.color = '#27ae60';
+
+    setTimeout(() => {
+      navegarA(crearLogin(navegarA));
+    }, 1000);
+  });
 
   const volver = document.createElement('p');
   volver.textContent = 'Volver al inicio';
   volver.classList.add('link');
+  volver.style.cursor = 'pointer';
   volver.addEventListener('click', () => {
     navegarA(crearLogin(navegarA));
   });
 
-  btnCrear.addEventListener('click', () => {
-    const usuario = inputUsuario.value.trim();
-    const correo = inputCorreo.value.trim();
-    const contrasena = inputContrasena.value.trim();
-
-    if (!usuario || !correo || !contrasena) {
-      alert('Todos los campos son obligatorios.');
-      return;
-    }
-
-    if (!/\S+@\S+\.\S+/.test(correo)) {
-      alert('El correo electrónico no es válido.');
-      return;
-    }
-
-    const cuenta = { usuario, correo, contrasena };
-
-    localStorage.setItem('usuarioRegistrado', JSON.stringify(cuenta));
-
-    alert('Cuenta creada exitosamente!');
-    navegarA(crearLogin(navegarA));
-  });
-
-  formulario.append(
-    titulo,
-    inputUsuario,
-    inputCorreo,
-    inputContrasena,
-    btnCrear,
-    volver
-  );
-
+  formulario.append(titulo, inputUsuario, inputContrasena, btnRegistrar, mensaje, volver);
   contenedor.appendChild(formulario);
   return contenedor;
 }

@@ -26,6 +26,7 @@ export function crearRecuperar(navegarA) {
 
     if (!correo) {
       mensaje.textContent = 'Ingrese un correo válido';
+      mensaje.style.color = 'red';
       return;
     }
 
@@ -34,7 +35,8 @@ export function crearRecuperar(navegarA) {
       mensaje.textContent = 'Enlace enviado al correo';
       mensaje.style.color = '#27ae60';
     } catch (error) {
-      mensaje.textContent = error.message;
+      mensaje.textContent = 'Error al enviar el enlace';
+      mensaje.style.color = 'red';
     }
   });
 
@@ -43,11 +45,7 @@ export function crearRecuperar(navegarA) {
   volver.classList.add('link');
   volver.style.cursor = 'pointer';
   volver.addEventListener('click', () => {
-    if (typeof navegarA === 'function') {
-      navegarA(crearLogin());
-    } else {
-      alert('Función de navegación no disponible');
-    }
+    navegarA(crearLogin(navegarA));
   });
 
   formulario.append(titulo, inputCorreo, btnEnviar, mensaje, volver);

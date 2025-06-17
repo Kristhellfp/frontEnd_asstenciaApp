@@ -1,9 +1,8 @@
-import { navegarA } from '../../app.js';
+import { crearRecuperar } from '../recuperar/recuperar.js';
+import { crearRegistro } from '../registro/registro.js';
 import { crearGrados } from '../grados/grados.js';
-import { crearListado } from '../listado/listado.js';
-import { crearGraficas } from '../graficas/graficas.js';
 
-export function crearLogin() {
+export function crearLogin(navegarA) {
   const contenedor = document.createElement('div');
   contenedor.classList.add('login-container');
 
@@ -24,43 +23,55 @@ export function crearLogin() {
   const btnIngresar = document.createElement('button');
   btnIngresar.textContent = 'Ingresar';
 
-  // Usuarios de prueba con sus roles
-  const usuarios = {
-    profesor: 'prof123',
-    coordinador: 'coord123',
-    administrador: 'admin123',
-  };
+  const mensaje = document.createElement('p');
+  mensaje.classList.add('mensaje');
 
   btnIngresar.addEventListener('click', () => {
     const usuario = inputUsuario.value.trim();
     const contrasena = inputContrasena.value.trim();
 
     if (!usuario || !contrasena) {
-      alert('Usuario o contraseña vacíos');
+      mensaje.textContent = 'Usuario o contraseña vacíos';
+      mensaje.style.color = 'red';
       return;
     }
 
-    if (usuarios[usuario] && usuarios[usuario] === contrasena) {
-      localStorage.setItem('rol', usuario); // guardamos rol
+    mensaje.textContent = 'Bienvenido, ' + usuario;
+    mensaje.style.color = '#27ae60';
 
-      // Según rol navegamos a la pantalla principal correspondiente
-      if (usuario === 'profesor') {
-        navegarA(crearGrados(navegarA));  // vista para profesor
-      } else if (usuario === 'coordinador') {
-        navegarA(crearGraficas(navegarA)); // vista para coordinador
-      } else if (usuario === 'administrador') {
-        navegarA(crearListado(navegarA));  // vista para admin
-      }
-    } else {
-      alert('Usuario o contraseña incorrectos');
-    }
+    setTimeout(() => {
+      navegarA(crearGrados(navegarA));
+    }, 1000);
   });
+
+  const enlaces = document.createElement('div');
+  enlaces.classList.add('login-enlaces');
+
+  const linkRecuperar = document.createElement('p');
+  linkRecuperar.textContent = '¿Olvidaste tu contraseña?';
+  linkRecuperar.classList.add('link');
+  linkRecuperar.style.cursor = 'pointer';
+  linkRecuperar.addEventListener('click', () => {
+    navegarA(crearRecuperar(navegarA));
+  });
+
+  const linkRegistro = document.createElement('p');
+  linkRegistro.textContent = 'Crear cuenta nueva';
+  linkRegistro.classList.add('link');
+  linkRegistro.style.cursor = 'pointer';
+  linkRegistro.addEventListener('click', () => {
+    navegarA(crearRegistro(navegarA));
+  });
+
+  enlaces.append(linkRecuperar, linkRegistro);
 
   formulario.append(
     titulo,
     inputUsuario,
     inputContrasena,
-    btnIngresar
+    btnIngresar,
+    mensaje,
+    enlaces
   );
 
   contenedor.appendChild(formulario);
