@@ -21,21 +21,12 @@ export function crearGrados(navegarA) {
   // Array para manejar los grados dinámicamente
   let grados = [];
   for (let i = 1; i <= 18; i++) {
-    grados.push(`Grado ${i}`);
-  }
-
-  // Configuración de horario
-  const horarioAsistencia = { inicio: '07:00', fin: '08:00' };
-
-  function validarHorario() {
-    const ahora = new Date();
-    const horaActual = ahora.toTimeString().slice(0,5); // "HH:MM"
-    return (horaActual >= horarioAsistencia.inicio && horaActual <= horarioAsistencia.fin);
+    grados.push({ id: i, nombre: `Grado ${i}` });
   }
 
   function renderGrados() {
     lista.innerHTML = '';
-    grados.forEach((grado, index) => {
+    grados.forEach((grado) => {
       const contenedorGrado = document.createElement('div');
       contenedorGrado.classList.add('grado-item');
       contenedorGrado.style.display = 'flex';
@@ -46,30 +37,28 @@ export function crearGrados(navegarA) {
 
       const btn = document.createElement('button');
       btn.classList.add('btn-grado');
-      btn.textContent = grado;
+      btn.textContent = grado.nombre;
       btn.style.flexGrow = '1';
       btn.addEventListener('click', () => {
-        if (validarHorario()) {
-          const vistaListado = mostrarListado(grado, navegarA);
-          vistaListado.dataset.view = 'listado';
-          navegarA(vistaListado);
-        } else {
-          alert(`No se puede tomar asistencia fuera del horario permitido.\nHorario: ${horarioAsistencia.inicio} - ${horarioAsistencia.fin}`);
-        }
+        const vistaListado = mostrarListado(grado.nombre, navegarA);
+        vistaListado.dataset.view = 'listado';
+        navegarA(vistaListado);
       });
 
       const btnEliminar = document.createElement('button');
       btnEliminar.textContent = '✖';
-      btnEliminar.title = `Eliminar ${grado}`;
+      btnEliminar.title = `Eliminar ${grado.nombre}`;
       btnEliminar.style.backgroundColor = '#e74c3c';
       btnEliminar.style.color = '#fff';
       btnEliminar.style.border = 'none';
       btnEliminar.style.padding = '5px 10px';
       btnEliminar.style.borderRadius = '4px';
       btnEliminar.style.cursor = 'pointer';
-      btnEliminar.addEventListener('click', () => {
-        if (confirm(`¿Seguro que deseas eliminar ${grado}?`)) {
-          grados.splice(index, 1);
+      
+      btnEliminar.addEventListener('click', (e) => {
+        e.stopPropagation(); // Evita conflictos con el evento del botón del grado
+        if (confirm(`¿Seguro que deseas eliminar ${grado.nombre}?`)) {
+          grados = grados.filter(g => g.id !== grado.id); // Filtra por ID
           renderGrados();
         }
       });
@@ -86,10 +75,8 @@ export function crearGrados(navegarA) {
   const acciones = document.createElement('div');
   acciones.classList.add('acciones');
 
-  // Cambiar texto de botón "Enviar" a "Guardar asistencia de todos los grados"
   const btnGuardar = document.createElement('button');
   btnGuardar.textContent = 'Guardar asistencia de todos los grados';
-  // Aquí puedes agregar el evento para guardar si tienes esa lógica
   btnGuardar.addEventListener('click', () => {
     alert('Funcionalidad para guardar asistencia aún no implementada.');
   });
@@ -128,14 +115,14 @@ function mostrarListado(grado, navegarA) {
   contenedor.appendChild(subTitulo);
 
   let alumnos = [
-    { nombre: 'Alumno 1', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 2', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 3', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 4', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 5', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 6', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 7', asistencia: 'ausente', uniformeOk: true, justificado: false },
-    { nombre: 'Alumno 8', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 1, nombre: 'Alumno 1', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 2, nombre: 'Alumno 2', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 3, nombre: 'Alumno 3', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 4, nombre: 'Alumno 4', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 5, nombre: 'Alumno 5', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 6, nombre: 'Alumno 6', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 7, nombre: 'Alumno 7', asistencia: 'ausente', uniformeOk: true, justificado: false },
+    { id: 8, nombre: 'Alumno 8', asistencia: 'ausente', uniformeOk: true, justificado: false },
   ];
 
   const listaAlumnos = document.createElement('div');
@@ -143,7 +130,7 @@ function mostrarListado(grado, navegarA) {
 
   function renderAlumnos() {
     listaAlumnos.innerHTML = '';
-    alumnos.forEach((alumno, index) => {
+    alumnos.forEach((alumno) => {
       const tarjeta = document.createElement('div');
       tarjeta.classList.add('alumno-box');
       tarjeta.style.border = '1px solid #ccc';
@@ -209,9 +196,11 @@ function mostrarListado(grado, navegarA) {
       btnEliminar.style.padding = '5px 10px';
       btnEliminar.style.borderRadius = '4px';
       btnEliminar.style.cursor = 'pointer';
-      btnEliminar.addEventListener('click', () => {
+      
+      btnEliminar.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (confirm(`¿Seguro que deseas eliminar a ${alumno.nombre}?`)) {
-          alumnos.splice(index, 1);
+          alumnos = alumnos.filter(a => a.id !== alumno.id);
           renderAlumnos();
         }
       });
@@ -256,7 +245,6 @@ function mostrarListado(grado, navegarA) {
   });
 
   contenedor.appendChild(btnMarcarTodoPresente);
-
   renderAlumnos();
   contenedor.appendChild(listaAlumnos);
 
@@ -277,7 +265,13 @@ function mostrarListado(grado, navegarA) {
       alert('Ingrese un nombre válido');
       return;
     }
-    alumnos.push({ nombre: nombreNuevo, asistencia: 'ausente', uniformeOk: true, justificado: false });
+    alumnos.push({ 
+      id: Date.now(), // ID único basado en timestamp
+      nombre: nombreNuevo, 
+      asistencia: 'ausente', 
+      uniformeOk: true, 
+      justificado: false 
+    });
     inputNombre.value = '';
     renderAlumnos();
   });
@@ -307,15 +301,16 @@ function crearProfesores(navegarA) {
   titulo.textContent = 'Profesores';
   contenedor.appendChild(titulo);
 
-  // Lista de profesores con planificación y estado de asistencia
   let profesores = [
     {
+      id: 1,
       nombre: 'Profesor Juan',
       planificaciones: ['Planificación 1', 'Planificación 2'],
-      asistencia: 'inasistencia', // valores: 'presente', 'inasistencia', 'tarde'
+      asistencia: 'inasistencia',
       justificado: false,
     },
     {
+      id: 2,
       nombre: 'Profesora María',
       planificaciones: ['Planificación A'],
       asistencia: 'presente',
@@ -329,19 +324,17 @@ function crearProfesores(navegarA) {
   function renderProfesores() {
     listaProfesores.innerHTML = '';
 
-    profesores.forEach((profesor, index) => {
+    profesores.forEach((profesor) => {
       const tarjeta = document.createElement('div');
       tarjeta.classList.add('profesor-box');
       tarjeta.style.border = '1px solid #ccc';
       tarjeta.style.padding = '10px';
       tarjeta.style.marginBottom = '10px';
 
-      // Nombre
       const nombre = document.createElement('h3');
       nombre.textContent = profesor.nombre;
       tarjeta.appendChild(nombre);
 
-      // Planificaciones
       const planificacionesTitulo = document.createElement('strong');
       planificacionesTitulo.textContent = 'Planificaciones:';
       tarjeta.appendChild(planificacionesTitulo);
@@ -354,7 +347,6 @@ function crearProfesores(navegarA) {
       });
       tarjeta.appendChild(listaPlanificaciones);
 
-      // Selector asistencia
       const labelAsistencia = document.createElement('label');
       labelAsistencia.textContent = 'Estado de asistencia: ';
       labelAsistencia.style.display = 'block';
@@ -380,7 +372,6 @@ function crearProfesores(navegarA) {
       labelAsistencia.appendChild(selectAsistencia);
       tarjeta.appendChild(labelAsistencia);
 
-      // Botón justificar (solo si tarde y no justificado)
       if (profesor.asistencia === 'tarde' && !profesor.justificado) {
         const btnJustificar = document.createElement('button');
         btnJustificar.textContent = 'Justificar Llegada Tarde';
@@ -401,7 +392,6 @@ function crearProfesores(navegarA) {
         tarjeta.appendChild(btnJustificar);
       }
 
-      // Botón eliminar profesor
       const btnEliminar = document.createElement('button');
       btnEliminar.textContent = 'Eliminar Profesor';
       btnEliminar.style.marginTop = '10px';
@@ -412,15 +402,15 @@ function crearProfesores(navegarA) {
       btnEliminar.style.borderRadius = '4px';
       btnEliminar.style.cursor = 'pointer';
 
-      btnEliminar.addEventListener('click', () => {
+      btnEliminar.addEventListener('click', (e) => {
+        e.stopPropagation();
         if (confirm(`¿Seguro que deseas eliminar a ${profesor.nombre}?`)) {
-          profesores.splice(index, 1);
+          profesores = profesores.filter(p => p.id !== profesor.id);
           renderProfesores();
         }
       });
 
       tarjeta.appendChild(btnEliminar);
-
       listaProfesores.appendChild(tarjeta);
     });
   }
@@ -428,7 +418,6 @@ function crearProfesores(navegarA) {
   renderProfesores();
   contenedor.appendChild(listaProfesores);
 
-  // Formulario agregar profesor nuevo
   const formAgregar = document.createElement('div');
   formAgregar.style.marginTop = '20px';
 
@@ -445,6 +434,7 @@ function crearProfesores(navegarA) {
       return;
     }
     profesores.push({
+      id: Date.now(),
       nombre: nombreNuevo,
       planificaciones: [],
       asistencia: 'inasistencia',
@@ -458,7 +448,6 @@ function crearProfesores(navegarA) {
   formAgregar.appendChild(btnAgregar);
   contenedor.appendChild(formAgregar);
 
-  // Botón para regresar a grados
   const btnVolver = document.createElement('button');
   btnVolver.textContent = '← Regresar a grados';
   btnVolver.style.marginTop = '20px';

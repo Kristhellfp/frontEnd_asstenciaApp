@@ -29,7 +29,7 @@ const rutas = {
   login: () => {
     const pantalla = crearLogin(navegarA);
     pantalla.dataset.view = 'login';
-    return pantalla;
+    return pantalla;zz
   },
   grados: () => {
     const pantalla = crearGrados(navegarA);
